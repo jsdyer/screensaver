@@ -1,0 +1,40 @@
+name: Build screensavers
+
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install MinGW-w64
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends gcc-mingw-w64-x86-64
+      - name: Cross-compile both screensavers
+        run: make
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-screensavers-x64
+          if-no-files-found: error
+          path: |
+            build/aquarium.scr
+            build/space.scr
+
+  smoke:
+    needs: build
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-screensavers-x64
+          path: build
+      - name: Test preview, full screen, and settings
+        shell: powershell
+        run: .\tests\smoke.ps1

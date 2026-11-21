@@ -1,0 +1,3 @@
+#define IDS_SCENE_NAME 1
+#define IDD_SETTINGS 100
+#define IDC_SPEED 101
