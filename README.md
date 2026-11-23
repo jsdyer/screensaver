@@ -1,5 +1,9 @@
 # Retro screensavers
 
+<!-- coolcode:guide -->
+Try either Windows saver with its /s switch, then use Settings to choose a speed saved separately for that scene. Move the mouse or press a key to exit; both files must be installed for both scenes to appear in the Windows picker.
+<!-- /coolcode:guide -->
+
 Two animated pixel-art scenes for Windows, written in C and built on Linux. Each is a separate screen saver in the Windows picker. The artwork is drawn in code, so the two `.scr` files are all you need to copy.
 
 | Glasswater Aquarium | Cassini Drift |
